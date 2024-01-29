@@ -13,16 +13,60 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.App {
+  background: linear-gradient(109.6deg, rgb(36, 45, 57) 11.2%, rgb(16, 37, 60) 51.2%, rgb(0, 0, 0) 98.6%);
+  min-height: 100vh; /* This ensures that the .App container covers the full viewport height */
+  display: flex;
+  flex-direction: column;
+}
+.App-body {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  text-align: center;
+  padding: 20px;
 }
+
+.task-input-container {
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+  padding: 2px;
+  background-color: #a10b9c00; /* Light background for the input area */
+  border-radius: 8px; /* Rounded corners */
+}
+
+.task-input-header {
+  margin-bottom: 20px;
+  color: #ffffff; /* Dark color for the header */
+}
+
+.task-input-field {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #ddd; /* Border for the input field */
+  border-radius: 4px; /* Slightly rounded corners for the input field */
+}
+
+.task-submit-button {
+  padding: 10px 20px;
+  background-color: #007bff; /* Example button color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.task-submit-button:hover {
+  background-color: #0056b3; /* Darken button color on hover */
+}
+
+.App-body p{
+  background-color: antiquewhite;
+}
+
 
 .App-link {
   color: #61dafb;
@@ -35,4 +79,16 @@
   to {
     transform: rotate(360deg);
   }
+}
+.App-footer {
+  background: rgba(0, 0, 0, 0.5); /* Dark but transparent */
+  color: white; /* Text color, change as needed */
+  text-align: center;
+  padding: 20px;
+  margin-top: auto; /* Pushes the footer to the bottom */
+}
+.App-footer a {
+  color: white; /* or any other color for links */
+  text-decoration: none; /* Optional: Removes underline from links */
+  /* Add more styles for your links as needed */
 }
