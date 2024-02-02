@@ -1,26 +1,28 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import logo from './logofill.png';
-//import Sidebar from './Sidebar'; // Import the Sidebar component
-//import Overlay from './Overlay'; // Import the Overlay component
 import './App.css';
-//import MainContent from './MainContent';
+import { IoMdArrowDropright } from "react-icons/io";
+import Sidebar from './sidebar'; // Import the Sidebar component
+import Overlay from './Overlay'; // Import the Overlay component
+import About from './About'; 
+import Login from './Login'; 
+import SignUp from './signUp';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+  
 
   const [task, setTask] = useState('');
   const [output, setOutput] = useState(''); // New state variable for the output
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Add this line
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen); // Add this function
 
   const handleTaskSubmit = async (e) => {
     e.preventDefault();
 
     // Use environment variable or secure method to store your OpenAI API key
-    const OPENAI_API_KEY = 'YOUR_OPENAI_API_KEY';
+    const OPENAI_API_KEY = 'YOUR_OPENAI_API_KEY'; //add this after UI is done
 
     try {
       const response = await axios.post(
@@ -45,32 +47,43 @@ function App() {
       setOutput(response.data.choices[0].text); // Update the output state with the response
     } catch (error) {
       console.error('Error calling OpenAI API:', error);
-      setOutput('Failed to get response from the assistant.'); // Handle error
+      setOutput('Failed to get response from Max AI.'); // Handle error
     }
   };
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} alt="Logo" className="App-logo" />
-      </header>
-     
-      <main className="App-body">
-
-      <main className="App-body">
-        <div className="task-input-container">
-          <h2 className="task-input-header">
-            Got too many tasks? Don't know where to start? 
-          </h2>
-          <h3 className="task-input-2"> We can help you</h3>
+    <BrowserRouter> {/* Assuming Router is BrowserRouter imported correctly */}
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} alt="Logo" className="App-logo" />
+        </header>
+        <div className="sidebar-container">
+        <div className="sidebarbutton">
+        <button onClick={toggleSidebar}><IoMdArrowDropright /></button>
         </div>
-        <div className="output-container">
-          <h3>test response </h3>
-         <div className='responsebox'> <p>{output}</p> </div>
+  
+         <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
         </div>
-      </main>
-       
-       
+        {/* Application Routes */}
+        <Routes>
+          <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          {/* Add more routes as needed */}
+        </Routes>
+  
+        <main className="App-body">
+          <div className="task-input-container">
+            <h2 className="task-input-header">
+              Got too many tasks? Don't know where to start?
+            </h2>
+            <h3 className="task-input-2">We can help you</h3>
+          </div>
+          <div className="output-container">
+            <h3>test response</h3>
+            <div className='responsebox'><p>{output}</p></div>
+          </div>
+        </main>
+        
         <div className="input-container">
           <form onSubmit={handleTaskSubmit}>
             <input 
@@ -83,23 +96,20 @@ function App() {
           </form>
         </div>
         
-       
-      </main>
-
-      <footer className="App-footer">
-        <a
-          className="TrisContact"
-          href="https://techtris.in/#"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Contact Me- Tristan Hancock
-        </a>
-      </footer>
-
-     
-    </div>
+        <footer className="App-footer">
+          <a
+            className="TrisContact"
+            href="https://techtris.in/#"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Contact Me- Tristan Hancock
+          </a>
+        </footer>
+      </div>
+    </BrowserRouter>
   );
-}
+  
+  }
 
 export default App;

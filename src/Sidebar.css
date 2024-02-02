@@ -1,0 +1,52 @@
+.sidebar {
+  position: fixed; /* Fixed position to the side of the screen */
+  top: 0; /* Align to the top */
+  left: 0; /* Start from the left edge */
+  width: 250px; /* Width of the sidebar */
+  height: 100%; /* Full height */
+  background: rgba(0, 0, 0, 0.9); /* Semi-transparent black background */
+  padding-top: 60px; /* Space for the top of the sidebar */
+  transition: transform 0.3s ease-in-out; /* Smooth opening/closing transitions */
+  transform: translateX(-100%); /* Start off-screen */
+  z-index: 2; /* Lower z-index than the button */
+}
+
+.sidebar.open {
+  transform: translateX(0); /* Move into view */
+}
+
+.sidebar-nav a {
+  display: block; /* Stack links vertically */
+  color: white; /* Text color */
+  padding: 20px; /* Padding for touch targets */
+  text-decoration: none; /* No underlines on links */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separator between links */
+  transition: background-color 0.3s; /* Smooth background transition for hover */
+}
+
+.sidebar-nav a:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Slight background highlight on hover */
+}
+
+.sidebar-container {
+  position: relative; /* Contains both the sidebar and the button */
+}
+
+.sidebarbutton {
+  position: absolute;
+  top: 50%; /* Centers the button vertically */
+  left: 198px; /* Positions the button to the right end of the sidebar, adjust based on sidebar width */
+  transform: translateY(-50%); /* Adjusts the button to be centered vertically */
+  z-index: 3; /* Above the sidebar's z-index */
+}
+
+.sidebarbutton button {
+  padding: 10px; /* Adjust padding as needed */
+  font-size: 24px; /* Adjust font size as needed, 90px seems too large */
+  border: none;
+  cursor: pointer;
+  background-color: transparent; /* Adjust background color as needed */
+  color: white;
+  border-radius: 50%; /* Rounds the button, remove if not needed */
+  z-index: 3; /* Same z-index as .sidebarbutton to ensure it's clickable */
+}

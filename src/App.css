@@ -101,8 +101,12 @@
   color: white; /* Text color, change as needed */
   text-align: center;
   padding: 20px;
-  margin-top: auto; /* Pushes the footer to the bottom */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
+
 .App-footer a {
   color: white; /* or any other color for links */
   text-decoration: none; /* Optional: Removes underline from links */
@@ -125,8 +129,27 @@
   align-items: center; /* Centers children vertically */
 }
 .task-bar::placeholder {
-  color: #888;      /* Light grey text color */
+  color: #fdf8f8;      /* Light grey text color */
   opacity: 1;       /* Full opacity */
   font-style: italic; /* Italicize placeholder text */
   /* Add other styles as needed */
+}
+.App-header{
+  
+
+
+}
+.sidebarbutton {
+  padding: 12px 24px; /* Increases the padding around the text, making the button larger */
+  font-size: 18px; /* Makes the text inside the button larger */
+  border: none; /* Removes the default border (optional) */
+  border-radius: 8px; /* Adds rounded corners (optional) */
+  cursor: pointer; /* Changes the cursor to a pointer to indicate it's clickable */
+  
+  color: white; /* Text color */
+  /* Additional properties to adjust the size */
+  width: auto; /* Adjust as needed, 'auto' sizes the button according to its content */
+  height: auto; /* Adjust as needed, 'auto' sizes the button according to its content and padding */
+  /* You might want to add some margin for spacing */
+  margin: 10px;
 }
