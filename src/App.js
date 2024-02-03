@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import logo from './logofill.png';
 import './App.css';
-import { IoMdArrowDropright } from "react-icons/io";
 import Sidebar from './sidebar'; // Import the Sidebar component
-import Overlay from './Overlay'; // Import the Overlay component
 import About from './About'; 
 import Login from './Login'; 
 import SignUp from './signUp';
@@ -12,14 +10,17 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   
+  
 
   const [task, setTask] = useState('');
   const [output, setOutput] = useState(''); // New state variable for the output
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Add this line
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen); // Add this function
+  
 
   const handleTaskSubmit = async (e) => {
     e.preventDefault();
+  
 
     // Use environment variable or secure method to store your OpenAI API key
     const OPENAI_API_KEY = 'YOUR_OPENAI_API_KEY'; //add this after UI is done
@@ -49,6 +50,7 @@ function App() {
       console.error('Error calling OpenAI API:', error);
       setOutput('Failed to get response from Max AI.'); // Handle error
     }
+  setTask('')
   };
   return (
     <BrowserRouter> {/* Assuming Router is BrowserRouter imported correctly */}
@@ -58,14 +60,15 @@ function App() {
         </header>
         <div className="sidebar-container">
         <div className="sidebarbutton">
-        <button onClick={toggleSidebar}><IoMdArrowDropright /></button>
+       
         </div>
   
          <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
         </div>
-        {/* Application Routes */}
+        
         <Routes>
-          <Route path="/about" element={<About />} />
+          <Route path="/about" element={<About />}
+           />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           {/* Add more routes as needed */}
@@ -74,7 +77,7 @@ function App() {
         <main className="App-body">
           <div className="task-input-container">
             <h2 className="task-input-header">
-              Got too many tasks? Don't know where to start?
+              Got too many things to do? Don't know where to start?
             </h2>
             <h3 className="task-input-2">We can help you</h3>
           </div>
@@ -86,12 +89,12 @@ function App() {
         
         <div className="input-container">
           <form onSubmit={handleTaskSubmit}>
-            <input 
+            <input
               type="text" 
               className="task-bar" 
               placeholder="Tell me your tasks"
               value={task}
-              onChange={(e) => setTask(e.target.value)}
+              onChange={(e) => setTask(e.target.value)} 
             />
           </form>
         </div>

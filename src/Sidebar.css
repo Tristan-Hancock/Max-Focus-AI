@@ -4,10 +4,10 @@
   left: 0; /* Start from the left edge */
   width: 250px; /* Width of the sidebar */
   height: 100%; /* Full height */
-  background: rgba(0, 0, 0, 0.9); /* Semi-transparent black background */
+  background: rgb(0, 0, 0); /* Semi-transparent black background */
   padding-top: 60px; /* Space for the top of the sidebar */
   transition: transform 0.3s ease-in-out; /* Smooth opening/closing transitions */
-  transform: translateX(-100%); /* Start off-screen */
+  transform: translateX(-80%); /* Start off-screen */
   z-index: 2; /* Lower z-index than the button */
 }
 
@@ -40,13 +40,32 @@
   z-index: 3; /* Above the sidebar's z-index */
 }
 
-.sidebarbutton button {
-  padding: 10px; /* Adjust padding as needed */
-  font-size: 24px; /* Adjust font size as needed, 90px seems too large */
+
+
+
+.toggle-button {
+  position: absolute;
+  top: 50%;
+  right: -50px; /* Adjust this value to position the button correctly outside the sidebar */
+  transform: translateY(-50%) rotate(90deg); /* Added rotate(90deg) for the rotation */
+
+  padding: 7px;
+  font-size: 70px; /* Adjust based on your design */
   border: none;
   cursor: pointer;
-  background-color: transparent; /* Adjust background color as needed */
-  color: white;
-  border-radius: 50%; /* Rounds the button, remove if not needed */
-  z-index: 3; /* Same z-index as .sidebarbutton to ensure it's clickable */
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.789);
+  border-radius: 50%;
+  z-index: 10; /* Ensure it's above other elements */
+}
+
+.icon-hovered {
+  /* Style specifically for FaArrowLeft when hovered */
+  /* Example styles: */
+  color: #ffffff; /* Change color */
+  transform: scale(1.2); /* Make it slightly larger */
+  transform: scale(1.2) rotate(-90deg); /* Add rotate if needed */
+  font-size: 40px;
+
+  transition: transform 0.3s ease, color 0.3s ease; /* Smooth transitions for transform and color */
 }

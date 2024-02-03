@@ -1,0 +1,18 @@
+/* icons.css adjustments */
+
+.icon-container {
+    display: flex; /* Enables flexbox */
+    align-items: center; /* Centers items vertically */
+  }
+  
+  .sidebar-icon {
+    font-size: 2em; /* Makes the icon larger, adjust as needed */
+    margin-right: 0.5em; /* Adds some space between the icon and the text */
+  }
+  
+  .sidebar-nav a {
+    display: flex; /* Aligns icon and text */
+    align-items: center; /* Centers items vertically */
+    /* ... other styles */
+  }
+  
