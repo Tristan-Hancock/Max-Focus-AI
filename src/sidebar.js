@@ -2,8 +2,6 @@ import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Sidebar.css';
-import { IoMdArrowDropright } from "react-icons/io";
-import { IoMdHome } from "react-icons/io";
 import { AiFillProfile } from "react-icons/ai";
 import './icons.css';
 import { FaUser } from "react-icons/fa";

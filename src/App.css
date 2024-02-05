@@ -2,8 +2,10 @@
 .App-logo {
   height: 30vmin;
   pointer-events: none;
-  margin-bottom: 100px;
-  top: 0;
+  transform: translate(-50%, -70%); /* Centers the logo exactly where you place it */
+
+  top: 50%;
+  position: absolute;
 }
 
 /* Fade-in animation */
@@ -25,6 +27,7 @@
   width: 100%;
   text-align: center;
   justify-content: center;
+  position: relative;
 }
 
 .App-body {
@@ -42,6 +45,7 @@
 
 
 .task-input-header {
+  position: relative;
   margin-bottom: 20px;
   color: #fefbfb; /* Dark color for the header */
   animation: fadeIn 2s ease-in-out;
@@ -69,13 +73,15 @@
   background: rgba(0, 0, 0, 0.5); /* Dark but transparent */
   color: white; /* Text color, change as needed */
   text-align: center;
-  padding: 20px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  padding: 20px; /* Padding on all sides */
+  position: absolute; /* Or 'fixed' if you want the footer to stay in place on scroll */
+  left: 0; /* Aligns the footer to the left edge of the parent element */
+  right: 0; /* Aligns the footer to the right edge of the parent element */
+  bottom: 0; /* Aligns the footer to the bottom of the parent element */
+  margin: 0 auto; /* Removes any margin that might push it off-screen */
+  width: auto; /* Allows the width to adjust to the content size */
+  max-width: calc(100% - 40px); /* Adjusts the width to allow for padding without going off-screen */
 }
-
 .App-footer a {
   color: white; 
   text-decoration: none; 
@@ -85,14 +91,12 @@
   padding-left: 500px;
   padding-right: 500px;
   height: auto; 
-  margin: 20px auto 20px; 
+  margin: 479px auto -200px; 
   background-color: rgb(112, 118, 118); 
   border: none; 
   border-radius: 25px; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-  display: flex; 
-  justify-content: center;
-  align-items: center;
+  position: bottom;
   
 }
 .task-bar::placeholder {
@@ -104,3 +108,80 @@
 .App-header {
   position: relative;
 }
+.card {
+  width: fit-content;
+  height: fit-content;
+  background-color: rgba(238, 238, 238, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: auto;
+  margin-right: auto;
+  gap: 20px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.055);
+  /* Remove any specific positioning if present, like top, left, etc., unless it's part of the design */
+}
+
+
+/* for all social containers*/
+.socialContainer {
+  width: 50px;
+  height: 50px;
+  background-color: rgb(44, 44, 44);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition-duration: .3s;
+}
+/* instagram*/
+.containerOne:hover {
+  background-color: #d62976;
+  transition-duration: .3s;
+}
+/* twitter*/
+.containerTwo:hover {
+  background-color: #00acee;
+  transition-duration: .3s;
+}
+/* linkdin*/
+.containerThree:hover {
+  background-color: #0072b1;
+  transition-duration: .3s;
+}
+/* Whatsapp*/
+.containerFour:hover {
+  background-color: #128C7E;
+  transition-duration: .3s;
+}
+
+.socialContainer:active {
+  transform: scale(0.9);
+  transition-duration: .3s;
+}
+
+.socialSvg {
+  width: 17px;
+}
+
+.socialSvg path {
+  fill: rgb(255, 255, 255);
+}
+
+.socialContainer:hover .socialSvg {
+  animation: slide-in-top 0.3s both;
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
