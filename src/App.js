@@ -7,126 +7,77 @@ import About from './About';
 import Login from './Login'; 
 import SignUp from './signUp';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-const OPENAI_API_KEY = ''; //add this after UI is done
+
+
+const OPENAI_API_KEY = 'YOUR_API_KEY'; //add this after UI is done
+
 
 function App() {
-  
-  
-
+  const [isLoading, setIsLoading] = useState(false); // New state variable for loading status
   const [task, setTask] = useState('');
   const [output, setOutput] = useState(''); // New state variable for the output
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Add this line
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen); // Add this function
   
   async function callOpenAIAPI() {
-    console.log("Calling openAI");
-
+    setIsLoading(true); // Start loading
+    console.log("Calling OpenAI");
+  
     const API_BODY = {
-      model: 'gpt-3.5-turbo-16k-0613',
-      prompt: 'You are a productive coach you help people select a task on what they need to get done you help people who dont know what to do next you select a task for them to do based on what could be the most important ONLY RESPOND WITH THE ORDER IN WHICH TASKS SHOULD BE COMPLETED DO NOT WRITE ANYTHING AFTER GIVING OUT THE INSTRUCTIONS ' + task,
+      model: 'gpt-3.5-turbo',
+      messages: [{
+        role: "system",
+        content: 'You are a productive coach , you help people select a task on what they need to get done , you help people who dont know what to do next , you select a task for them to do based on what could be the most important , ONLY RESPOND WITH THE ORDER IN WHICH TASKS SHOULD BE COMPLETED AND NOTHING ELSE , start the sentace with "I think you should\n " and then display the answers one below the other in a list' + task,
+      }, {
+        role: "user",
+        content: task,
+      }],
       temperature: 0.5,
       max_tokens: 60,
       top_p: 1.0,
       frequency_penalty: 0.0,
       presence_penalty: 0.0,
+    };
+  
+    try {
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + OPENAI_API_KEY, // Ensure your API key is correctly included
+        },
+        body: JSON.stringify(API_BODY)
+      });
+  
+      if (!response.ok) { // Check if the response was ok (status in the range 200-299)
+        console.error('API request failed with status', response.status);
+        const errorInfo = await response.text(); // Attempt to read response text
+        console.error('Failure response body:', errorInfo);
+        return; // Exit the function or handle the error appropriately
+      }
+  
+      const data = await response.json(); // Correctly await the parsing of the JSON
+      if (data.choices && data.choices.length > 0) {
+        const responseText = data.choices[0].message.content; // Assuming the response structure matches your expectations
+        setOutput(responseText); // Update the output state variable
+      } else {
+        console.error('No choices in response:', data);
+      }
+    } catch (error) {
+      console.error('Error during API call:', error);
+    } finally{
+      setIsLoading(false); // Stop loading once the call is completed or fails
+
+
     }
 
-
-    await fetch("https://api.openai.com/v1/completions",{
-      method: "POST",
-      headers: {
-        "Content-Type": "application.json",
-        "Authorization": "Bearer" + OPENAI_API_KEY
-      },
-      body: JSON.stringify(API_BODY)
-
-
-    }).then((data) => {
-      return data.json();
-
-    }).then((data) => {
-      console.log(data);
-
-    });
-
   }
-
+  
 
   const handleTaskSubmit = async (e) => {
     e.preventDefault();
 
 
-
-   
-
-   
-  
-
-    // Use environment variable or secure method to store your OpenAI API key
-    const OPENAI_API_KEY = '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'; //add this after UI is done
-   /* async function callAPI() {
-      console.log("Calling API");
-    
-      const API_BODY = {
-        model: 'gpt-3.5-turbo-16k-0613',
-        prompt: 'You are a productive coach you help people select a task on what they need to get done you help people who dont know what to do next you select a task for them to do based on what could be the most important ONLY RESPOND WITH THE ORDER IN WHICH TASKS SHOULD BE COMPLETED DO NOT WRITE ANYTHING AFTER GIVING OUT THE INSTRUCTIONS ' + task,
-        temperature: 0.5,
-        max_tokens: 60,
-        top_p: 1.0,
-        frequency_penalty: 0.0,
-        presence_penalty: 0.0,
-      };
-    
-      try {
-        const response = await fetch("https://api.openai.com/v1/completions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${OPENAI_API_KEY}` // Fixed space between Bearer and the token
-          },
-          body: JSON.stringify(API_BODY)
-        });
-    
-        const data = await response.json();
-        console.log(data);
-        setOutput(data.choices[0].text); // Assuming you want to set the API response to the output state
-      } catch (error) {
-        console.error('Error calling OpenAI API:', error);
-        setOutput('Failed to get response from the API.'); // Handle error
-      }
-    }
-    
-
-
-
-
- 
-    /*try {
-      const response = await axios.post(
-        'https://api.openai.com/v1/completions',
-        {
-          model: 'gpt-3.5-turbo-16k-0613',
-          prompt: 'You are a productive coach you help people select a task on what they need to get done you help people who dont know what to do next  you select a task for them to do based on what could be the most important  ONLY RESPOND WITH THE ORDER IN WHICH TASKS SHOULD BE COMPLETED  DO NOT WRITE ANYTHING AFTER GIVING OUT THE INSTRUCTIONS ' + task,   
-          temperature: 0.5,
-          max_tokens: 60,
-          top_p: 1.0,
-          frequency_penalty: 0.0,
-          presence_penalty: 0.0,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${OPENAI_API_KEY}`
-          }
-        }
-      );
-
-      setOutput(response.data.choices[0].text); // Update the output state with the response
-    } catch (error) {
-      console.error('Error calling OpenAI API:', error);
-      setOutput('Failed to get response from Max AI.'); // Handle error
-    }
-  setTask('') */
   }
   return (
     <BrowserRouter> 
@@ -157,13 +108,46 @@ function App() {
             <h3 className="task-input-2">One Task At A Time</h3>
           </div>
           <div className="output-container">
-            <h3>test response</h3>
-            <div className='responsebox'><p>{output}</p></div>
+
+            {!isLoading &&(
+              <div class="loader">
+              <div class="loader-square"></div>
+              <div class="loader-square"></div>
+              <div class="loader-square"></div>
+              <div class="loader-square"></div>
+              <div class="loader-square"></div>
+              <div class="loader-square"></div>
+              <div class="loader-square"></div>
+              </div>
+
+            )}
+
+
+            {isLoading && (
+
+            
+
+          <div class="loader">
+  <div class="square" id="sq1"></div>
+  <div class="square" id="sq2"></div>
+  <div class="square" id="sq3"></div>
+  <div class="square" id="sq4"></div>
+  <div class="square" id="sq5"></div>
+  <div class="square" id="sq6"></div>
+  <div class="square" id="sq7"></div>
+  <div class="square" id="sq8"></div>
+  <div class="square" id="sq9"></div>
+</div> 
+)}
+            
+            <div className='responsebox'>
+            <p>{output}</p>
+            </div>
           </div>
         </main>
         
         <div className="input-container">
-  <div /*onSubmit={handleTaskSubmit} */ className="sender-area">
+  <div onSubmit={handleTaskSubmit}  className="sender-area">
     <div className="input-place">
       <textarea
         onChange={(e) => setTask(e.target.value)}
@@ -195,7 +179,7 @@ function App() {
   <a href="#" class="socialContainer containerTwo">
     <svg class="socialSvg twitterSvg" viewBox="0 0 16 16"> <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"></path> </svg>              </a>
     
-  <a href="#" class="socialContainer containerThree">
+  <a href="https://www.linkedin.com/in/tristan-hancock-b54570223/" class="socialContainer containerThree">
     <svg class="socialSvg linkdinSvg" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path></svg>
   </a>
   
