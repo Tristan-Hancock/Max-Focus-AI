@@ -23,7 +23,7 @@ function App() {
   
 
     // Use environment variable or secure method to store your OpenAI API key
-    const OPENAI_API_KEY = 'YOUR_OPENAI_API_KEY'; //add this after UI is done
+    const OPENAI_API_KEY = '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'; //add this after UI is done
 
     try {
       const response = await axios.post(
