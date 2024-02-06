@@ -7,6 +7,7 @@ import About from './About';
 import Login from './Login'; 
 import SignUp from './signUp';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+const OPENAI_API_KEY = ''; //add this after UI is done
 
 function App() {
   
@@ -17,22 +18,97 @@ function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Add this line
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen); // Add this function
   
+  async function callOpenAIAPI() {
+    console.log("Calling openAI");
+
+    const API_BODY = {
+      model: 'gpt-3.5-turbo-16k-0613',
+      prompt: 'You are a productive coach you help people select a task on what they need to get done you help people who dont know what to do next you select a task for them to do based on what could be the most important ONLY RESPOND WITH THE ORDER IN WHICH TASKS SHOULD BE COMPLETED DO NOT WRITE ANYTHING AFTER GIVING OUT THE INSTRUCTIONS ' + task,
+      temperature: 0.5,
+      max_tokens: 60,
+      top_p: 1.0,
+      frequency_penalty: 0.0,
+      presence_penalty: 0.0,
+    }
+
+
+    await fetch("https://api.openai.com/v1/completions",{
+      method: "POST",
+      headers: {
+        "Content-Type": "application.json",
+        "Authorization": "Bearer" + OPENAI_API_KEY
+      },
+      body: JSON.stringify(API_BODY)
+
+
+    }).then((data) => {
+      return data.json();
+
+    }).then((data) => {
+      console.log(data);
+
+    });
+
+  }
+
 
   const handleTaskSubmit = async (e) => {
     e.preventDefault();
+
+
+
+   
+
+   
   
 
     // Use environment variable or secure method to store your OpenAI API key
-    const OPENAI_API_KEY = 'your api key'; //add this after UI is done
+    const OPENAI_API_KEY = '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'; //add this after UI is done
+   /* async function callAPI() {
+      console.log("Calling API");
+    
+      const API_BODY = {
+        model: 'gpt-3.5-turbo-16k-0613',
+        prompt: 'You are a productive coach you help people select a task on what they need to get done you help people who dont know what to do next you select a task for them to do based on what could be the most important ONLY RESPOND WITH THE ORDER IN WHICH TASKS SHOULD BE COMPLETED DO NOT WRITE ANYTHING AFTER GIVING OUT THE INSTRUCTIONS ' + task,
+        temperature: 0.5,
+        max_tokens: 60,
+        top_p: 1.0,
+        frequency_penalty: 0.0,
+        presence_penalty: 0.0,
+      };
+    
+      try {
+        const response = await fetch("https://api.openai.com/v1/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${OPENAI_API_KEY}` // Fixed space between Bearer and the token
+          },
+          body: JSON.stringify(API_BODY)
+        });
+    
+        const data = await response.json();
+        console.log(data);
+        setOutput(data.choices[0].text); // Assuming you want to set the API response to the output state
+      } catch (error) {
+        console.error('Error calling OpenAI API:', error);
+        setOutput('Failed to get response from the API.'); // Handle error
+      }
+    }
+    
 
-    try {
+
+
+
+ 
+    /*try {
       const response = await axios.post(
         'https://api.openai.com/v1/completions',
         {
           model: 'gpt-3.5-turbo-16k-0613',
-          prompt: task,
+          prompt: 'You are a productive coach you help people select a task on what they need to get done you help people who dont know what to do next  you select a task for them to do based on what could be the most important  ONLY RESPOND WITH THE ORDER IN WHICH TASKS SHOULD BE COMPLETED  DO NOT WRITE ANYTHING AFTER GIVING OUT THE INSTRUCTIONS ' + task,   
           temperature: 0.5,
-          max_tokens: 100,
+          max_tokens: 60,
           top_p: 1.0,
           frequency_penalty: 0.0,
           presence_penalty: 0.0,
@@ -50,8 +126,8 @@ function App() {
       console.error('Error calling OpenAI API:', error);
       setOutput('Failed to get response from Max AI.'); // Handle error
     }
-  setTask('')
-  };
+  setTask('') */
+  }
   return (
     <BrowserRouter> 
       <div className="App">
@@ -87,23 +163,24 @@ function App() {
         </main>
         
         <div className="input-container">
-  <form onSubmit={handleTaskSubmit} className="sender-area">
+  <div /*onSubmit={handleTaskSubmit} */ className="sender-area">
     <div className="input-place">
-      
-      <input
+      <textarea
+        onChange={(e) => setTask(e.target.value)}
         placeholder="Start typing..."
         className="send-input"
-        type="text"
         value={task}
-        onChange={(e) => setTask(e.target.value)}
+        cols={50}
+        rows={10}
       />
-      <button type="submit" className="send">
+      <button  onClick={callOpenAIAPI} className="send">
         <svg className="send-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
           <path fill="#6B6C7B" d="M481.508,210.336L68.414,38.926c-17.403-7.222-37.064-4.045-51.309,8.287C2.86,59.547-3.098,78.551,1.558,96.808 L38.327,241h180.026c8.284,0,15.001,6.716,15.001,15.001c0,8.284-6.716,15.001-15.001,15.001H38.327L1.558,415.193 c-4.656,18.258,1.301,37.262,15.547,49.595c14.274,12.357,33.937,15.495,51.31,8.287l413.094-171.409 C500.317,293.862,512,276.364,512,256.001C512,235.638,500.317,218.139,481.508,210.336z"/>
         </svg>
       </button>
+      
     </div>
-  </form>
+  </div>
 </div>
 
         
