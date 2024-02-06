@@ -53,7 +53,7 @@ function App() {
   setTask('')
   };
   return (
-    <BrowserRouter> {/* Assuming Router is BrowserRouter imported correctly */}
+    <BrowserRouter> 
       <div className="App">
         <header className="App-header">
           <img src={logo} alt="Logo" className="App-logo" />
@@ -71,15 +71,14 @@ function App() {
            />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          {/* Add more routes as needed */}
         </Routes>
   
         <main className="App-body">
           <div className="task-input-container">
             <h2 className="task-input-header">
-              Got too many things to do? Don't know where to start?
+            Overwhelmed with tasks? Let Max AI help you prioritize, organize, and efficiently manage your to-do list
             </h2>
-            <h3 className="task-input-2">We can help you</h3>
+            <h3 className="task-input-2">One Task At A Time</h3>
           </div>
           <div className="output-container">
             <h3>test response</h3>
@@ -88,27 +87,28 @@ function App() {
         </main>
         
         <div className="input-container">
-          <form onSubmit={handleTaskSubmit}>
-            <input
-              type="text" 
-              className="task-bar" 
-              placeholder="Tell me your tasks"
-              value={task}
-              onChange={(e) => setTask(e.target.value)} 
-            />
-          </form>
-        </div>
-        
-        <footer className="App-footer">
-        <a
-            className="TrisContact"
-            href="https://techtris.in/#"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Contact-Tristan Hancock
+  <form onSubmit={handleTaskSubmit} className="sender-area">
+    <div className="input-place">
+      
+      <input
+        placeholder="Start typing..."
+        className="send-input"
+        type="text"
+        value={task}
+        onChange={(e) => setTask(e.target.value)}
+      />
+      <button type="submit" className="send">
+        <svg className="send-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path fill="#6B6C7B" d="M481.508,210.336L68.414,38.926c-17.403-7.222-37.064-4.045-51.309,8.287C2.86,59.547-3.098,78.551,1.558,96.808 L38.327,241h180.026c8.284,0,15.001,6.716,15.001,15.001c0,8.284-6.716,15.001-15.001,15.001H38.327L1.558,415.193 c-4.656,18.258,1.301,37.262,15.547,49.595c14.274,12.357,33.937,15.495,51.31,8.287l413.094-171.409 C500.317,293.862,512,276.364,512,256.001C512,235.638,500.317,218.139,481.508,210.336z"/>
+        </svg>
+      </button>
+    </div>
+  </form>
+</div>
 
-          </a>
+        
+  <footer className="App-footer">
+  <a className="TrisContact"href="https://techtris.in/#"target="_blank" rel="noopener noreferrer"> Contact-Tristan Hancock</a>
           
             <div class="card">
   <a href="#" class="socialContainer containerOne">
