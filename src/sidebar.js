@@ -11,6 +11,7 @@ import { FaArrowLeft } from "react-icons/fa";
 
 
 
+
 function Sidebar({ isOpen, toggleSidebar }) {
 
   const [isHovered, setIsHovered] = useState(false);

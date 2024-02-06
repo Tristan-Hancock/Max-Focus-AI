@@ -34,7 +34,7 @@ function App() {
         content: task,
       }],
       temperature: 0.5,
-      max_tokens: 60,
+      max_tokens: 40,
       top_p: 1.0,
       frequency_penalty: 0.0,
       presence_penalty: 0.0,
@@ -68,17 +68,10 @@ function App() {
       console.error('Error during API call:', error);
     } finally{
       setIsLoading(false); // Stop loading once the call is completed or fails
-
-
     }
-
   }
-  
-
   const handleTaskSubmit = async (e) => {
     e.preventDefault();
-
-
   }
   return (
     <BrowserRouter> 
