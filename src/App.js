@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.css';
+// import axios from 'axios';
 import logo from './logofill.png';
 import './App.css';
 import Sidebar from './sidebar'; // Import the Sidebar component
@@ -9,7 +10,7 @@ import SignUp from './signUp';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
-const OPENAI_API_KEY = 'YOUR_API_KEY'; //add this after UI is done
+const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 
 
 function App() {
@@ -44,7 +45,7 @@ function App() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + OPENAI_API_KEY, // Ensure your API key is correctly included
+          "Authorization": "Bearer " + process.env.REACT_APP_OPENAI_API_KEY, // Ensure your API key is correctly included
         },
         body: JSON.stringify(API_BODY)
       });
@@ -168,7 +169,7 @@ function App() {
 </div>
 
         
-  <footer className="App-footer">
+  <footer className="App-footer ">
   <a className="TrisContact"href="https://techtris.in/#"target="_blank" rel="noopener noreferrer"> Contact-Tristan Hancock</a>
           
             <div class="card">
