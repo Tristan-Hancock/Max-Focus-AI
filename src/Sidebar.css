@@ -4,7 +4,7 @@
   left: 0; /* Start from the left edge */
   width: 250px; /* Width of the sidebar */
   height: 100%; /* Full height */
-  background: rgb(0, 0, 0); /* Semi-transparent black background */
+  background: rgba(0, 0, 0, 0.776); /* Semi-transparent black background */
   padding-top: 60px; /* Space for the top of the sidebar */
   transition: transform 0.1s ease-in-out; /* Smooth opening/closing transitions */
   transform: translateX(-80%); /* Start off-screen */
@@ -40,7 +40,10 @@
   z-index: 3; /* Above the sidebar's z-index */
 }
 
+.animations {
+  display: flex;
 
+}
 
 
 .toggle-button {

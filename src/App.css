@@ -1,9 +1,7 @@
 .App-logo {
   height: 30vmin;
   pointer-events: none;
-  transform: translate(-50%, -190%); /* Centers the logo exactly where you place it */
-  top: 50%;
-  position: fixed;
+  margin-top: -80px;
 }
 
 /* Fade-in animation */
@@ -16,31 +14,27 @@
   }
 }
 
-.App {
+body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* center */
   min-height: 100vh;
-  /*background: linear-gradient(109.6deg, rgb(36, 45, 57) 11.2%, rgb(16, 37, 60) 51.2%, rgb(0, 0, 0) 98.6%); */
   background-color: #111111;
-  background-image: linear-gradient(
-    32deg,
-    rgba(8, 8, 8, 0.74) 30px,
-    transparent
-  );
+  background-image: linear-gradient(32deg, rgba(8, 8, 8, 0.74) 30px,transparent);
   background-size: 60px 60px;
   background-position: -5px -5px;
 }
 
 
 .App-body {
-  display: flex;
+
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   text-align: center;
   padding: 20px;
+  flex: 1;
+  width: 100%;
   
 }
 .App-body p {
@@ -50,7 +44,6 @@
   font-size: 1.1em; /* Slightly larger font size */
   border-radius: 8px; /* Rounded corners */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
-  text-align: left; /* Align text to the left */
   line-height: 1.5; /* Improve line spacing */
   display: block; /* Ensures the p tag is a block-level element */
   width: 80%; /* Adjust width as needed */
@@ -60,10 +53,7 @@
 
 
 .task-input-header {
-  position: fixed;
-  top: 250px; /* Adjust as needed */
-  left: 50%; /* Center relative to the entire window */
-  transform: translateX(-50%); /* Shift back to the left by half of its own width */
+  top: 190px; /* Adjust as needed */
   color: #fefbfb; /* Dark color for the header */
   z-index: 10; /* Make sure it's above other elements */
 }
@@ -73,10 +63,7 @@
   color: #fefbfb;
   animation: fadeIn 2s ease-in-out;
   position: fixed;
-  left: 50%; /* Set the left position to 50% of the viewport width */
-  top: 350px; /* Adjust this value as needed to position the element vertically */
-  transform: translateX(-50%); /* This will center the element horizontally */
-  /* Remove margin-left as it's not necessary with the above centering method */
+
 }
 
 .App-link {
@@ -91,10 +78,11 @@
     transform: rotate(360deg);
   }
 }
-.App-footer {
+footer {
   background: rgba(0, 0, 0, 0.5); /* Dark but transparent */
   color: white; /* Text color, change as needed */
   text-align: center;
+  width: 100%;
   padding: 20px; /* Padding on all sides */
   position: absolute; /* Or 'fixed' if you want the footer to stay in place on scroll */
   left: 0; /* Aligns the footer to the left edge of the parent element */
@@ -123,8 +111,12 @@
   /* Add other styles as needed */
 }
 .App-header {
-  position: relative;
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+  width: 100%; /* Ensure it spans the full width */
+  z-index: 1000; /* Ensure it stays on top of other content */
 }
+
 .card {
   width: fit-content;
   height: fit-content;
@@ -266,6 +258,7 @@
   height: 70px;
   display: flex;
   border-radius: 8px;
+  overflow: hidden;
 }
 
 .message {
@@ -301,7 +294,7 @@
   color: white;
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
+  overflow: auto;
 
 }
 
@@ -336,15 +329,21 @@
 
 .send-icon {
   width: 17px;
+ overflow-wrap: normal;
 }
 .input-container{
-  margin-top: 700px;
-  position: fixed;
+  max-width: 700px; /*  margin-top: 40%; */
   color: #ffffff;
+  position: absolute;
+  width: 100%;
+
 
 }
 .responsebox{
   background-color: #0073b100;
+  justify-content: center;
+  margin-right: 40px;
+
 }
 @keyframes loader_5191 {
   from {
@@ -557,3 +556,27 @@
  .loader-square:nth-of-type(7) {
   animation-delay: -10s;
  }
+ @keyframes loader_5191 {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 480px) {
+  .card, .socialContainer {
+    flex-direction: column; /* Stack social icons vertically */
+  }
+}
+.animations{
+  margin: 400px auto; /* Centering */
+
+}
