@@ -1,7 +1,6 @@
 .App-logo {
   height: 30vmin;
   pointer-events: none;
-  margin-top: -80px;
 }
 
 /* Fade-in animation */
@@ -14,16 +13,16 @@
   }
 }
 
-body {
+.App {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* center */
+  justify-content: center; /* center */
   min-height: 100vh;
   background-color: #111111;
   background-image: linear-gradient(32deg, rgba(8, 8, 8, 0.74) 30px,transparent);
   background-size: 60px 60px;
-  background-position: -5px -5px;
+ 
 }
 
 
@@ -34,7 +33,7 @@ body {
   text-align: center;
   padding: 20px;
   flex: 1;
-  width: 100%;
+  width: 50%;
   
 }
 .App-body p {
@@ -62,7 +61,10 @@ body {
   display: flex;
   color: #fefbfb;
   animation: fadeIn 2s ease-in-out;
-  position: fixed;
+  
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 
 }
 
@@ -95,7 +97,8 @@ footer {
 .App-footer a {
   color: white; 
   text-decoration: none; 
-  
+  margin-top: 20px;
+
 }
 .task-bar {
   max-width: 600px; /* Limit max width */
@@ -331,13 +334,19 @@ footer {
   width: 17px;
  overflow-wrap: normal;
 }
-.input-container{
-  max-width: 700px; /*  margin-top: 40%; */
+@media (max-width: 600px) {
+  .input-container {
+    padding: 10px 0; /* Less padding on smaller screens */
+  }
+}
+
+.input-container {
+  max-width: 700px;
   color: #ffffff;
-  position: absolute;
   width: 100%;
-
-
+  margin: 0 auto; /* Centers the container */
+  padding: 20px 0; /* Adds space inside the container */
+  margin-bottom: 130px;
 }
 .responsebox{
   background-color: #0073b100;
@@ -575,8 +584,4 @@ body, html {
   .card, .socialContainer {
     flex-direction: column; /* Stack social icons vertically */
   }
-}
-.animations{
-  margin: 400px auto; /* Centering */
-
 }
