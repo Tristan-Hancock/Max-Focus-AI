@@ -5,9 +5,11 @@ import logo from './logofill.png';
 import './App.css';
 import Sidebar from './sidebar'; // Import the Sidebar component
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {google} from 'googleapis';
 
 
 const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
+const googlecalendarkey = process.env.googlekey;
 
 
 function App() {
@@ -72,10 +74,35 @@ function App() {
       setIsLoading(false); // Stop loading once the call is completed or fails
     }
   }
+
+ /* async function addToGoogleCalendar(eventSummary) {
+    try {
+      // Initialize Google Calendar API
+      const calendar = google.calendar({ version: 'v3', auth:  googlecalendarkey});
+
+      // Create event object
+      const event = {
+        summary: eventSummary,
+        // set other properties of the event as needed
+      };
+
+      // Insert event to the calendar
+      const res = await calendar.events.insert({
+        calendarId: 'primary',
+        resource: event,
+      });
+
+      console.log('Event created: %s', res.data.htmlLink);
+    } catch (error) {
+      console.error('Error adding event to Google Calendar:', error);
+    }
+  } */
+
   const handleTaskSubmit = async (e) => {
     e.preventDefault();
    
   }
+
   return (
     <BrowserRouter>
   <div className="App">
