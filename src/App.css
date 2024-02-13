@@ -1,6 +1,7 @@
 .App-logo {
   height: 30vmin;
   pointer-events: none;
+  
 }
 
 /* Fade-in animation */
@@ -52,16 +53,17 @@
 
 
 .task-input-header {
-  top: 190px; /* Adjust as needed */
-  color: #fefbfb; /* Dark color for the header */
+  color: #fffdfadc; /* Dark color for the header */
   z-index: 10; /* Make sure it's above other elements */
+  font-size: 26px; /* This makes the font size smaller than the default h2 size */
+margin-top: -25px;
 }
 
 .task-input-2 {
   display: flex;
   color: #fefbfb;
   animation: fadeIn 2s ease-in-out;
-  
+  margin-top: 50px;
   flex-direction: column;
   align-items: center;
   text-align: center;
@@ -114,10 +116,9 @@ footer {
   /* Add other styles as needed */
 }
 .App-header {
-  top: 0; /* Align to the top */
-  left: 0; /* Align to the left */
-  width: 100%; /* Ensure it spans the full width */
-  z-index: 1000; /* Ensure it stays on top of other content */
+  display: flex;
+  justify-content: center;
+  
 }
 
 .card {
