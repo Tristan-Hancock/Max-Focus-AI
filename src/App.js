@@ -5,7 +5,7 @@ import logo from './logofill.png';
 import './App.css';
 import Sidebar from './sidebar'; // Import the Sidebar component
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import {google} from 'googleapis';
+//import {google} from 'googleapis';
 
 
 const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
