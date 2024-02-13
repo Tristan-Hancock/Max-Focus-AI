@@ -1,7 +1,13 @@
 import React from 'react';
 
-const About = () => {
-  return <div>History</div>;
-};
+function About  () {
+  return(
 
-export default About; // Default export
+
+<div> About here </div>
+
+
+  );
+}
+
+export default About; 

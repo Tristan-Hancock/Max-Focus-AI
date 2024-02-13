@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate here
 import './Sidebar.css';
 import { AiFillProfile } from "react-icons/ai";
 import './icons.css';
@@ -15,6 +15,12 @@ import { IoMdHome } from "react-icons/io";
 function Sidebar({ isOpen, toggleSidebar }) {
 
   const [isHovered, setIsHovered] = useState(false);
+  let navigate = useNavigate(); // Initialize the navigate function
+
+  const handleLoginNavigation = () => {
+    toggleSidebar(); // This will close the sidebar if it's a collapsible sidebar
+    navigate('/Login'); // Navigate to the login route
+  };
 
   return (
     <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
@@ -43,7 +49,7 @@ function Sidebar({ isOpen, toggleSidebar }) {
        </div>
      </Link>
     
-        <Link to="/login" onClick={toggleSidebar}>
+        <Link to="/Login" onClick={handleLoginNavigation}>
 
 
         <div className="icon-container">
