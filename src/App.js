@@ -6,7 +6,7 @@ import './App.css';
 import Sidebar from './sidebar'; // Import the Sidebar component
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 //import {google} from 'googleapis';
-
+// need to do correct installation refer docs of node
 
 const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 const googlecalendarkey = process.env.googlekey;
@@ -48,7 +48,7 @@ function App() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + process.env.REACT_APP_OPENAI_API_KEY, // Ensure your API key is correctly included
+          "Authorization": "Bearer " + OPENAI_API_KEY, // Ensure your API key is correctly included
         },
         body: JSON.stringify(API_BODY)
       });
