@@ -3,6 +3,11 @@
   pointer-events: none;
   
 }
+.body-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
 /* Fade-in animation */
 @keyframes fadeIn {
@@ -88,7 +93,7 @@ footer {
   text-align: center;
   width: 100%;
   padding: 20px; /* Padding on all sides */
-  position: absolute; /* Or 'fixed' if you want the footer to stay in place on scroll */
+  position: fixed; /* Or 'fixed' if you want the footer to stay in place on scroll */
   left: 0; /* Aligns the footer to the left edge of the parent element */
   right: 0; /* Aligns the footer to the right edge of the parent element */
   bottom: 0; /* Aligns the footer to the bottom of the parent element */
@@ -1083,5 +1088,6 @@ body, html {
 .animations {
   display: flex;
   
+  z-index: 1;
 
 }

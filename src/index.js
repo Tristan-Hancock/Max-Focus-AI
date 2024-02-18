@@ -3,11 +3,26 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createClient } from '@supabase/supabase-js';
+import {SessionContextProvider} from '@supabase/auth-helpers-react';
+import Login from './Login';
 
+const supabaseUrl = 'https://gvdxnqjkbatwduccsbaf.supabase.co'
+// const supabaseKey = process.env.SUPABASE_KEY
+//onst supabase = createClient(supabaseUrl, supabaseKey)
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const supabase = createClient(
+ "YOUR URL HERE",
+ " YOUR KEY HERE"
+
+);
+
+
 root.render(
   <React.StrictMode>
+    <SessionContextProvider supabaseClient = {supabase}>
     <App />
+    </SessionContextProvider>
   </React.StrictMode>
 );
 
