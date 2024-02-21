@@ -1,17 +1,17 @@
 .custom-modal {
-    display: none; /* Initially hidden, show class will manage display */
-    position: fixed;
-    right: 0; /* Align to the right side of the screen */
-    top: 25%; /* Adjust this value to control vertical positioning */
-    width: 1000px; /* Set a fixed width for the modal */
-    height: 50%; /* Adjust height as needed */
-    overflow: auto; /* Allows scrolling for overflowing content */
-    outline: 0;
-    background-color: rgb(176, 176, 176); /* Semi-transparent backdrop */
-    border-left: 1px solid rgba(0, 0, 0, .2); /* Optional: adds a slight border to the left side */
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5); /* Optional: adds shadow for depth (adjust as needed) */
-  }
-  
+  display: none; /* Initially hidden, show class will manage display */
+  position: fixed;
+  right: 0; /* Align to the right side of the screen */
+  top: 25%; /* Adjust this value to control vertical positioning */
+  width: 30%; /* Fixed width for consistent shape */
+  height: 50%; /* Fixed height */
+  overflow: auto; /* Allows scrolling for overflowing content */
+  outline: 0;
+  background-color: rgba(176, 176, 176, 0); /* Semi-transparent backdrop */
+  border-left: 1px solid rgba(0, 0, 0, .2);
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+  z-index: 300;
+}
   .custom-modal.show {
     display: block; /* Show the modal */
   }
@@ -19,7 +19,7 @@
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .custom-modal {
-      width: 80%; /* Adjust width to take up more screen space on smaller devices */
+      width: 40%; /* Adjust width to take up more screen space on smaller devices */
       top: 10%; /* Adjust top positioning to be closer to the top */
       height: 70%; /* Increase height to show more content without scrolling */
     }
@@ -34,4 +34,63 @@
       box-shadow: -3px 0 10px rgba(0, 0, 0, 0.5); /* Adjust the shadow for a subtler effect */
     }
   }
+
   
+  .card2 {
+    --bg: #e8e8e8;
+    --contrast: #e2e0e0;
+    --grey: #93a1a1;
+    position: relative;
+    padding: 9px;
+    background-color: var(--bg);
+    border-radius: 35px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  }
+  /* Increase the size and visibility of the date/time picker elements */
+.date-time-picker {
+  font-size: 1rem; /* Larger font size for better readability */
+  padding: 0.5rem; /* Padding for better touch targets */
+  width: 100%; /* Full width for better access */
+}
+
+/* Style the buttons and inputs within the date/time picker for better visibility */
+.date-time-picker button,
+.date-time-picker input {
+  cursor: pointer; /* Indicates an interactive element */
+  background: #fff; /* Light background */
+  color: #333; /* Dark text for contrast */
+  border: 1px solid #ddd; /* Subtle border */
+  margin: 0.2rem; /* Spacing around elements */
+  padding: 0.5rem 1rem; /* Padding inside elements */
+}
+
+/* Additional styles for the calendar pop-up */
+.calendar-pop-up {
+  background: #fff; /* Light background for the pop-up */
+  border: 1px solid #ddd; /* Border for definition */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+}
+
+/* Ensure the calendar days are easy to click/tap */
+.calendar-day {
+  display: inline-block;
+  width: 2rem; /* Width for each day */
+  height: 2rem; /* Height for each day */
+  line-height: 2rem; /* Center text vertically */
+  text-align: center; /* Center text horizontally */
+  margin: 0.1rem; /* Space out the days */
+  cursor: pointer; /* Indicates an interactive element */
+}
+
+/* Style for the selected day */
+.calendar-day.selected {
+  background-color: #007bff; /* Highlight color */
+  color: #fff; /* White text for contrast */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 480px) {
+  .date-time-picker {
+    font-size: 1.2rem; /* Slightly larger font on small screens */
+  }
+}

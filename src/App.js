@@ -12,8 +12,6 @@ import './login.css';
 import './dialog.css';
 import DateTimePicker from 'react-datetime-picker'
 const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
-const googlecalendarkey = process.env.googlekey;
-const gemini  = process.env.gemini;
 
 function App() {
   const [isLoading, setIsLoading] = useState(false); // New state variable for loading status
@@ -287,17 +285,36 @@ if(error){
 
 {showModal && (
   <div className="custom-modal show" >
+  
+
+    
     {session ?
     <>
-    <h2>Add to {session.user.email}</h2>
-    <p>Start of event</p>
-    <input type="text" onChange={(e) => setEventName(e.target.value)} />
-    <p>Event Description</p>
-    <p> {output} </p>
-    <hr />
-    <button onClick={() => createCalendarEvent()}> Add to calendar</button>
-
-
+      <div className="card2">
+          <div className="card-inner">
+            <h2>Add to {session.user.email}</h2>
+            <p>Start of event</p>
+            <input
+              type="text"
+              onChange={(e) => setEventName(e.target.value)}
+              className="event-name-input"
+            />
+            <p>Event Description</p>
+            <p>{output}</p>
+            <p>When do you want to do this?</p>
+            {/* Apply the custom class to the date/time picker */}
+            <DateTimePicker
+              onChange={setStart}
+              value={start}
+              className="date-time-picker"
+              calendarClassName="calendar-pop-up"
+              // Add more props as needed for styling and functionality
+            />
+            <hr />
+            <button onClick={() => createCalendarEvent()}>Add to calendar</button>
+          </div>
+        </div>
+     
     </>
     :
     <>
@@ -310,7 +327,6 @@ if(error){
 
 
     }
-    
   </div>
 )}
 
