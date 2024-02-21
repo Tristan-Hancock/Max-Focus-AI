@@ -1,16 +1,18 @@
 .sidebar {
+  display: flex; /* Use flexbox */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: space-between; /* Space between top nav and bottom sign-out */
   position: fixed; /* Fixed position to the side of the screen */
   top: 0; /* Align to the top */
   left: 0; /* Start from the left edge */
-  width: 250px; /* Width of the sidebar */
+  width: 280px; /* Width of the sidebar */
   height: 100%; /* Full height */
   background: rgba(0, 0, 0, 0.776); /* Semi-transparent black background */
   padding-top: 60px; /* Space for the top of the sidebar */
-  transition: transform 0.1s ease-in-out; /* Smooth opening/closing transitions */
-  transform: translateX(-80%); /* Start off-screen */
-  z-index: 2; /* Lower z-index than the button */
+  transition: transform 0.3s ease-in-out; /* Smooth opening/closing transitions */
+  transform: translateX(-100%); /* Start off-screen */
+  z-index: 2; /* Ensure it is above other content */
 }
-
 .sidebar.open {
   transform: translateX(0); /* Move into view */
 }
@@ -30,6 +32,8 @@
 
 .sidebar-container {
   position: relative; /* Contains both the sidebar and the button */
+  margin-top: auto; /* Pushes itself to the bottom */
+
 }
 
 .sidebarbutton {
@@ -49,7 +53,7 @@
 .toggle-button {
   position: absolute;
   top: 50%;
-  right: -50px; /* Adjust this value to position the button correctly outside the sidebar */
+  right: -80px; /* Adjust this value to position the button correctly outside the sidebar */
   transform: translateY(-50%) rotate(90deg); /* Added rotate(90deg) for the rotation */
 
   padding: 7px;
@@ -85,7 +89,7 @@
   color: white;
   background-color: #171717;
   box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
-  margin-top: 360%;
+  margin-top: auto;
   cursor: pointer;
 }
 .google-signin {

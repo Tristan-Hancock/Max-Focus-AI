@@ -36,7 +36,7 @@ function Sidebar({ isOpen, toggleSidebar }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {isHovered ? <FaArrowLeft className="icon-hovered" /> : <CgBorderStyleSolid />}
+      {isHovered ? <CgBorderStyleSolid className="icon-hovered" /> : <CgBorderStyleSolid />}
     </button>
    <nav className="sidebar-nav">
    <Link to="/about" onClick={toggleSidebar}>
@@ -57,6 +57,7 @@ function Sidebar({ isOpen, toggleSidebar }) {
      </nav>
 
      <div className="signout-container">
+     
      <div class="google-signin" onClick={signOut}>
          <svg stroke="currentColor" fill="currentColor" stroke-width="0" version="1.1" x="0px" y="0px" class="google-icon" viewBox="0 0 48 48" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
             <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12

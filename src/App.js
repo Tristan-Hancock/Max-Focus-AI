@@ -8,7 +8,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {useSession , useSupabaseClient , useSessionContext} from '@supabase/auth-helpers-react';
 import Login from './Login';
 import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate here
-import './login.css'
+import './login.css';
+import './dialog.css';
+import DateTimePicker from 'react-datetime-picker'
 const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 const googlecalendarkey = process.env.googlekey;
 const gemini  = process.env.gemini;
@@ -26,6 +28,17 @@ function App() {
   const session = useSession(); //if session exist we have user 
   const supabase = useSupabaseClient(); // talk to supabse from here 
 
+  const [start, setStart] = useState(new Date());
+  const [end, setEnd] = useState(new Date());
+  const [eventName, setEventName ] = useState("");
+  //const [eventDescription ,setEventDescription] = useState("");
+  const eventDescription = output;
+//Dialog box logic 
+const [showModal, setShowModal] = useState(false);
+const [modalAnswer, setModalAnswer] = useState(null);
+
+
+
 async function googleSignIn(){
  const {error}= await supabase.auth.signInWithOAuth({
     provider: 'google',
@@ -39,12 +52,10 @@ if(error){
   console.log(error);
 
 }
-}
-  async function signOut (){
-    await supabase.auth.signOut();
-  }
-  console.log(session); 
 
+
+}
+ 
   async function callOpenAIAPI() {
    
     setIsLoading(true); // Start loading
@@ -98,8 +109,40 @@ if(error){
     } finally{
       setIsLoading(false); // Stop loading once the call is completed or fails
     }
+    setShowModal(true);
+
   }
 
+
+  async function createCalendarEvent(){
+    console.log("Event created ");
+    const event = {
+      'summary': eventName,
+      'description': eventDescription,
+       'start': {
+        'dateTime': start.toISOString(),
+        'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone //gets time zxone
+       },
+       'end': {
+        'dateTime': end.toISOString(),
+        'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone //gets time zxone
+       }
+
+    }
+    await fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events",{
+      method: "POST",
+      headers: {
+        'Authorization': 'Bearer ' + session.provider_token //Connect to token 
+      },
+      body: JSON.stringify(event)
+    }).then((data)=> {
+      return data.json();
+    }).then((data)=> {
+      console.log(data);
+      alert("Event created , check your google Calendar!");
+    });
+    
+    }
 
  
 
@@ -107,12 +150,23 @@ if(error){
     e.preventDefault();
    
   }
-
+  function handleModalResponse(answer) {
+    setShowModal(false); // Close the modal
+    setModalAnswer(answer); // Set the answer state
+  
+    if (answer === 'yes') {
+      // Execute the logic for 'Yes' response
+      console.log("User said yes. Proceeding with displaying content.");
+    } else {
+      // Logic for 'No' response or simply do nothing
+      console.log("User said no. The window content will not be displayed.");
+    }
+  }
+  
   return (
     <BrowserRouter>
 
-<Routes>
-        {/* Other routes... */}
+      <Routes>
         <Route path="/Login" element={<Login />} />
       </Routes>
 
@@ -123,8 +177,10 @@ if(error){
     </header>
 
     <div className="sidebar-container">
+      
       <div className="sidebarbutton"></div>
-      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} 
+      />
     </div>
 
     
@@ -229,10 +285,38 @@ if(error){
 
     }
 
+{showModal && (
+  <div className="custom-modal show" >
+    {session ?
+    <>
+    <h2>Add to {session.user.email}</h2>
+    <p>Start of event</p>
+    <input type="text" onChange={(e) => setEventName(e.target.value)} />
+    <p>Event Description</p>
+    <p> {output} </p>
+    <hr />
+    <button onClick={() => createCalendarEvent()}> Add to calendar</button>
+
+
+    </>
+    :
+    <>
+
     
+    
+    </>
+
+
+
+
+    }
+    
+  </div>
+)}
+
 
     <footer className="App-footer">
-  
+      
     <a className="TrisContact"href="https://techtris.in/#"target="_blank" rel="noopener noreferrer"> Contact-Tristan Hancock</a>
           
           <div class="card">

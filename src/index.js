@@ -12,9 +12,8 @@ const supabaseUrl = 'https://gvdxnqjkbatwduccsbaf.supabase.co'
 //onst supabase = createClient(supabaseUrl, supabaseKey)
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const supabase = createClient(
- "YOUR URL HERE",
- " YOUR KEY HERE"
-
+ "YOUR URL",
+ "API KEY"
 );
 
 

@@ -1,0 +1,37 @@
+.custom-modal {
+    display: none; /* Initially hidden, show class will manage display */
+    position: fixed;
+    right: 0; /* Align to the right side of the screen */
+    top: 25%; /* Adjust this value to control vertical positioning */
+    width: 1000px; /* Set a fixed width for the modal */
+    height: 50%; /* Adjust height as needed */
+    overflow: auto; /* Allows scrolling for overflowing content */
+    outline: 0;
+    background-color: rgb(176, 176, 176); /* Semi-transparent backdrop */
+    border-left: 1px solid rgba(0, 0, 0, .2); /* Optional: adds a slight border to the left side */
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5); /* Optional: adds shadow for depth (adjust as needed) */
+  }
+  
+  .custom-modal.show {
+    display: block; /* Show the modal */
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .custom-modal {
+      width: 80%; /* Adjust width to take up more screen space on smaller devices */
+      top: 10%; /* Adjust top positioning to be closer to the top */
+      height: 70%; /* Increase height to show more content without scrolling */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .custom-modal {
+      width: 95%; /* Make the modal almost full-width on very small screens */
+      top: 5%; /* Reduce the top margin to utilize screen space better */
+      height: 80%; /* Further increase height for small screens */
+      border-left: none; /* Optional: remove the border on very small screens for a cleaner look */
+      box-shadow: -3px 0 10px rgba(0, 0, 0, 0.5); /* Adjust the shadow for a subtler effect */
+    }
+  }
+  
