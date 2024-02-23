@@ -169,7 +169,7 @@ background-color: rgb(239, 239, 239);
   text-align: center; /* Center the text */
   width: 300px; /* Fixed width, adjust as necessary */
   margin: 0 auto; /* Center the modal horizontally */
-  position: fixed; /* Make it fixed to stay on top of the content */
+  position: absolute; /* Make it fixed to stay on top of the content */
   top: 50%; /* Center vertically */
   right: 0%;
   transform: translate(-50%, -50%); /* Adjust the position to truly center the modal */
@@ -192,12 +192,31 @@ background-color: rgb(239, 239, 239);
   border: none; /* Remove default border */
   border-radius: 5px; /* Rounded corners for buttons */
   cursor: pointer; /* Pointer cursor on hover */
-  background-color: #007BFF; /* Blue background */
+  background-color: #454545; /* Blue background */
   color: white; /* White text */
   font-size: 14px; /* Font size */
   transition: background-color 0.3s; /* Smooth transition for background color */
 }
 
 .confirmation-modal button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #2e2e2e; /* Darker blue on hover */
+}
+.event-added-confirmation{
+  background-color: #fff; /* Light background to make it stand out */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 20px; /* Padding inside the modal */
+  text-align: center; /* Center the text */
+  width: 300px; /* Fixed width, adjust as necessary */
+  margin: 0 auto; /* Center the modal horizontally */
+  position: absolute; /* Make it fixed to stay on top of the content */
+  top: 50%; /* Center vertically */
+  right: 0%;
+  transform: translate(-50%, -50%); /* Adjust the position to truly center the modal */
+  z-index: 10; /* Ensure it's above other content */
+}
+
+.textevent{
+  color: #000000;
+  font-size: 20px;
 }

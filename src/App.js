@@ -23,6 +23,7 @@ function App() {
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen); // Add this function
   const [hasSubmitted, setHasSubmitted] = useState(false); // New state variable for tracking submission
   const [showConfirmationModal, setShowConfirmationModal] = useState(false); // New state for confirmation modal
+  const [eventAdded, setEventAdded] = useState(false);
 
 
 
@@ -148,7 +149,9 @@ if(error){
       return data.json();
     }).then((data)=> {
       console.log(data);
-      alert("Event created , check your google Calendar!");
+      //alert("Event created , check your google Calendar!");
+      setEventAdded(true); // Update state to indicate event was added
+    setShowModal(false); // Optionally close the modal
     });
     
     }
@@ -302,7 +305,21 @@ if(error){
         </div>
       )}
 
-{showModal && (
+
+
+
+{eventAdded && (
+  <div className="event-added-confirmation">
+    <div className="textevent"> 
+    <p>Added to Google Calendar  </p>
+    </div>
+  </div>
+)}
+
+
+
+
+{showModal && !eventAdded && (
   <div className="custom-modal show" >
    
       <div className="card2">
@@ -317,7 +334,7 @@ if(error){
             />
             <p className="boldText">Adding to calendar</p>
             <p className="boldFake">{output}</p>
-            <p className="boldText">When do you want to do this?</p>
+            {/*<p className="boldText">When do you want to do this?</p> */}
           
             <div className="date-picker-container">
  
