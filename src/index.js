@@ -5,8 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createClient } from '@supabase/supabase-js';
 import {SessionContextProvider} from '@supabase/auth-helpers-react';
-import Login from './Login';
-
 const supabaseUrl = 'https://gvdxnqjkbatwduccsbaf.supabase.co'
 // const supabaseKey = process.env.SUPABASE_KEY
 //onst supabase = createClient(supabaseUrl, supabaseKey)

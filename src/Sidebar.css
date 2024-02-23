@@ -65,17 +65,11 @@
   border-radius: 50%;
   z-index: 10; /* Ensure it's above other elements */
 }
+.toggle-button:hover{
+  transform: translateY(-50%) rotate(90deg); /* Added rotate(90deg) for the rotation */
 
-.icon-hovered {
-  /* Style specifically for FaArrowLeft when hovered */
-  /* Example styles: */
-  color: #ffffff; /* Change color */
-  transform: scale(1.2); /* Make it slightly larger */
-  transform: scale(1.2) rotate(-90deg); /* Add rotate if needed */
-  font-size: 40px;
-
-  transition: transform 0.3s ease, color 0.3s ease; /* Smooth transitions for transform and color */
 }
+
 
 .signout-container {
   display: flex;

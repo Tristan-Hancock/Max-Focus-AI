@@ -10,7 +10,9 @@ import Login from './Login';
 import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate here
 import './login.css';
 import './dialog.css';
-import DateTimePicker from 'react-datetime-picker'
+import DateTimePicker from 'react-datetime-picker';
+
+
 const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 
 function App() {
@@ -20,6 +22,7 @@ function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Add this line
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen); // Add this function
   const [hasSubmitted, setHasSubmitted] = useState(false); // New state variable for tracking submission
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false); // New state for confirmation modal
 
 
 
@@ -64,7 +67,7 @@ if(error){
       model: 'gpt-3.5-turbo',
       messages: [{
         role: "system",
-        content: 'You are a productive coach, you help people select a task on what they need to get done, you help people who don\'t know what to do next, you select a task for them to do based on what could be the most important, ONLY RESPOND WITH THE ORDER IN WHICH TASKS SHOULD BE COMPLETED AND NOTHING ELSE, start the sentence with "I think you should\n " and then display the answers one below the other in a list ' + task,
+        content: 'You are a productive coach, you help people select a task on what they need to get done, you help people who don\'t know what to do next, you select a task for them to do based on what could be the most important, ONLY RESPOND WITH THE ORDER IN WHICH TASKS SHOULD BE COMPLETED AND NOTHING ELSE ' + task,
 
       }, {
         role: "user",
@@ -99,6 +102,13 @@ if(error){
         const responseText = data.choices[0].message.content; // Assuming the response structure matches your expectations
         setOutput(responseText); // Update the output state variable
         setTask('');
+        if (session) {
+          // Show confirmation modal only if there's an active session
+          setShowConfirmationModal(true);
+        } else {
+          console.log("No active session. Please log in.");
+        }
+
       } else {
         console.error('No choices in response:', data);
       }
@@ -107,7 +117,8 @@ if(error){
     } finally{
       setIsLoading(false); // Stop loading once the call is completed or fails
     }
-    setShowModal(true);
+
+
 
   }
 
@@ -148,16 +159,14 @@ if(error){
     e.preventDefault();
    
   }
-  function handleModalResponse(answer) {
-    setShowModal(false); // Close the modal
-    setModalAnswer(answer); // Set the answer state
   
-    if (answer === 'yes') {
-      // Execute the logic for 'Yes' response
-      console.log("User said yes. Proceeding with displaying content.");
+  function handleUserDecision(answer) {
+    setShowConfirmationModal(false); // Close confirmation modal
+
+    if (answer === 'yes' ) {
+      setShowModal(true); // Show event addition form if user clicks "Yes"
     } else {
-      // Logic for 'No' response or simply do nothing
-      console.log("User said no. The window content will not be displayed.");
+      console.log("User decided not to proceed.");
     }
   }
   
@@ -283,50 +292,63 @@ if(error){
 
     }
 
+{showConfirmationModal && (
+        <div className="confirmation-modal">
+          <p>Would you like to add this task to your calendar?</p>
+          <div className="boxbutton"> 
+          <button onClick={() => handleUserDecision('yes')}>Yes</button>
+          <button onClick={() => handleUserDecision('no')}>No</button>
+          </div>
+        </div>
+      )}
+
 {showModal && (
   <div className="custom-modal show" >
-  
-
-    
-    {session ?
-    <>
+   
       <div className="card2">
           <div className="card-inner">
-            <h2>Add to {session.user.email}</h2>
-            <p>Start of event</p>
+            <p className="boldText">Add to {session.user.email}</p>
+            <p className="boldText"></p>
             <input
               type="text"
               onChange={(e) => setEventName(e.target.value)}
               className="event-name-input"
+              placeholder="Title it here"
             />
-            <p>Event Description</p>
-            <p>{output}</p>
-            <p>When do you want to do this?</p>
-            {/* Apply the custom class to the date/time picker */}
-            <DateTimePicker
-              onChange={setStart}
-              value={start}
-              className="date-time-picker"
-              calendarClassName="calendar-pop-up"
-              // Add more props as needed for styling and functionality
-            />
+            <p className="boldText">Adding to calendar</p>
+            <p className="boldFake">{output}</p>
+            <p className="boldText">When do you want to do this?</p>
+          
+            <div className="date-picker-container">
+ 
+  
+ { /*<DateTimePicker  value={start} onChange={setStart}  />
+  <DateTimePicker  value={start} onChange={setEnd}  />*/   } 
+
+</div>
+          
+
             <hr />
-            <button onClick={() => createCalendarEvent()}>Add to calendar</button>
+            <div className="enter"> 
+            <button class="button " onClick={() => createCalendarEvent()} >
+  <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262">
+  <path fill="#4285F4" d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"></path>
+  <path fill="#34A853" d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1"></path>
+  <path fill="#FBBC05" d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782"></path>
+  <path fill="#EB4335" d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"></path>
+</svg>
+  Add to Calendar </button>
+
+
+
+ 
+
+
+            </div>
           </div>
         </div>
      
-    </>
-    :
-    <>
-
-    
-    
-    </>
-
-
-
-
-    }
+   
   </div>
 )}
 
@@ -352,7 +374,7 @@ if(error){
       </a>
        </div>
        <div className="version">
-        Version 1.0
+        Version 2.0
        </div>
       
     </footer>

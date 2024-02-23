@@ -4,13 +4,15 @@
   right: 0; /* Align to the right side of the screen */
   top: 25%; /* Adjust this value to control vertical positioning */
   width: 30%; /* Fixed width for consistent shape */
-  height: 50%; /* Fixed height */
   overflow: auto; /* Allows scrolling for overflowing content */
   outline: 0;
-  background-color: rgba(176, 176, 176, 0); /* Semi-transparent backdrop */
+  background-color: rgba(0, 0, 0, 0); /* Semi-transparent backdrop */
   border-left: 1px solid rgba(0, 0, 0, .2);
-  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
   z-index: 300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
   .custom-modal.show {
     display: block; /* Show the modal */
@@ -37,8 +39,9 @@
 
   
   .card2 {
-    --bg: #e8e8e8;
-    --contrast: #e2e0e0;
+
+    --bg: #0000008b;
+    --contrast: #d6b3b3;
     --grey: #93a1a1;
     position: relative;
     padding: 9px;
@@ -50,18 +53,19 @@
 .date-time-picker {
   font-size: 1rem; /* Larger font size for better readability */
   padding: 0.5rem; /* Padding for better touch targets */
-  width: 100%; /* Full width for better access */
+  width: 10%; /* Full width for better access */
 }
 
 /* Style the buttons and inputs within the date/time picker for better visibility */
 .date-time-picker button,
 .date-time-picker input {
   cursor: pointer; /* Indicates an interactive element */
-  background: #fff; /* Light background */
+  background: #000000; /* Light background */
   color: #333; /* Dark text for contrast */
-  border: 1px solid #ddd; /* Subtle border */
+  border: 1px solid #575656; /* Subtle border */
   margin: 0.2rem; /* Spacing around elements */
   padding: 0.5rem 1rem; /* Padding inside elements */
+
 }
 
 /* Additional styles for the calendar pop-up */
@@ -69,6 +73,7 @@
   background: #fff; /* Light background for the pop-up */
   border: 1px solid #ddd; /* Border for definition */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  gap: 200px;
 }
 
 /* Ensure the calendar days are easy to click/tap */
@@ -93,4 +98,106 @@
   .date-time-picker {
     font-size: 1.2rem; /* Slightly larger font on small screens */
   }
+}
+
+
+.card-inner {
+  text-align: center; /* Centers text elements */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Adjust width as needed */
+}
+
+/* Input and button styling for a better look */
+.event-name-input, .date-time-picker {
+  margin: 10px 0; /* Spacing between elements */
+  padding: 10px;
+  width: 80%; /* Adjust width as needed */
+  border: 1px solid #ccc; /* Example border */
+  border-radius: 4px; /* Rounded corners */
+}
+
+.buttonenter {
+  background-color: #2f2f2f; 
+  border: none;
+  color: white;
+  padding: 15px 32px; /* Larger click area */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 0;
+  cursor: pointer;
+  border-radius: 4px; /* Rounded corners */
+  width: 80%; /* Adjust width as needed */
+  border-radius: 50px;
+}
+
+.enter {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border-radius: 50px;
+  background-color: #007bff00;
+
+}
+.buttonenter:hover{
+  background-color: #00000062;
+}
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
+
+.boldText {
+  font-weight: bold;
+  font-family: 'Open Sans', sans-serif; /* Using Open Sans as an example */
+  color: #fbffff;
+}
+.boldFake{
+  border-radius: 20px;
+background-color: rgb(239, 239, 239);
+}
+
+
+
+
+.confirmation-modal {
+  background-color: #fff; /* Light background to make it stand out */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 20px; /* Padding inside the modal */
+  text-align: center; /* Center the text */
+  width: 300px; /* Fixed width, adjust as necessary */
+  margin: 0 auto; /* Center the modal horizontally */
+  position: fixed; /* Make it fixed to stay on top of the content */
+  top: 50%; /* Center vertically */
+  right: 0%;
+  transform: translate(-50%, -50%); /* Adjust the position to truly center the modal */
+  z-index: 10; /* Ensure it's above other content */
+}
+
+.confirmation-modal p {
+  margin-bottom: 20px; /* Space between the text and the buttons */
+  font-size: 16px; /* Adjust the font size as necessary */
+}
+
+.boxbutton {
+  display: flex; /* Use flexbox for the buttons */
+  justify-content: center; /* Center buttons horizontally */
+  gap: 10px; /* Space between buttons */
+}
+
+.confirmation-modal button {
+  padding: 10px 20px; /* Padding inside buttons */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners for buttons */
+  cursor: pointer; /* Pointer cursor on hover */
+  background-color: #007BFF; /* Blue background */
+  color: white; /* White text */
+  font-size: 14px; /* Font size */
+  transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.confirmation-modal button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
 }

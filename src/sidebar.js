@@ -33,10 +33,9 @@ function Sidebar({ isOpen, toggleSidebar }) {
     <button
       className="toggle-button"
       onClick={toggleSidebar}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+     
     >
-      {isHovered ? <CgBorderStyleSolid className="icon-hovered" /> : <CgBorderStyleSolid />}
+      <CgBorderStyleSolid  /> 
     </button>
    <nav className="sidebar-nav">
    <Link to="/about" onClick={toggleSidebar}>
