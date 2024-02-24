@@ -1,7 +1,6 @@
 import React from 'react';
 import './login.css';
 import {useSession , useSupabaseClient, useSessionContext} from '@supabase/auth-helpers-react';
-import { useState } from 'react';
 
 function Login() {
 

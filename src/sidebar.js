@@ -1,32 +1,22 @@
 import React from 'react';
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate here
+import { Link } from 'react-router-dom'; // Import useNavigate here
 import './Sidebar.css';
 import { AiFillProfile } from "react-icons/ai";
 import './icons.css';
-import { FaUser } from "react-icons/fa";
-import { IoLogIn } from "react-icons/io5";
 import { CgBorderStyleSolid } from "react-icons/cg";
-import { FaArrowLeft } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
-import Login from './Login';
-import {useSession , useSupabaseClient , useSessionContext} from '@supabase/auth-helpers-react';
+import {useSession , useSupabaseClient } from '@supabase/auth-helpers-react';
 
 
 
 function Sidebar({ isOpen, toggleSidebar }) {
   const session = useSession(); //if session exist we have user 
   const supabase = useSupabaseClient(); // talk to supabse from here 
-  const [isHovered, setIsHovered] = useState(false);
-  let navigate = useNavigate(); // Initialize the navigate function
   async function signOut (){
     await supabase.auth.signOut();
   }
   console.log(session); 
-  const handleLoginNavigation = () => {
-    toggleSidebar(); // This will close the sidebar if it's a collapsible sidebar
-    navigate('/Login'); // Navigate to the login route
-  };
+ 
 
   return (
     <aside className={`sidebar ${isOpen ? 'open' : ''}`}>

@@ -34,11 +34,10 @@ function App() {
   const [start, setStart] = useState(new Date());
   const [end, setEnd] = useState(new Date());
   const [eventName, setEventName ] = useState("");
-  //const [eventDescription ,setEventDescription] = useState("");
   const eventDescription = output;
+
 //Dialog box logic 
 const [showModal, setShowModal] = useState(false);
-const [modalAnswer, setModalAnswer] = useState(null);
 
 
 
@@ -66,7 +65,7 @@ if(error){
     
   
     const API_BODY = {
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4',
       messages: [{
         role: "system",
         content: 'You are a productive coach, you help people select a task on what they need to get done, you help people who don\'t know what to do next, you select a task for them to do based on what could be the most important, ONLY RESPOND WITH THE ORDER IN WHICH TASKS SHOULD BE COMPLETED AND NOTHING ELSE ' + task,
