@@ -5,13 +5,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createClient } from '@supabase/supabase-js';
 import {SessionContextProvider} from '@supabase/auth-helpers-react';
-const supabaseUrl = 'https://gvdxnqjkbatwduccsbaf.supabase.co'
-// const supabaseKey = process.env.SUPABASE_KEY
-//onst supabase = createClient(supabaseUrl, supabaseKey)
+const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
+const supabaseKey = process.env.REACT_APP_SUPABASE_KEY;
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const supabase = createClient(
-  
-);
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 
 root.render(

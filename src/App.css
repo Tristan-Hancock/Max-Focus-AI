@@ -333,6 +333,7 @@ footer {
   align-items: center;
   cursor: pointer;
   justify-content: flex-end;
+  border-radius: 20px;
   
 }
 
