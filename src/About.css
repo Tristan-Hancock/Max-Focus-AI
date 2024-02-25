@@ -1,0 +1,46 @@
+.about-page {
+    height: 100vh; /* Set height to 100% of viewport height */
+    width: 80vw; /* Set width to 100% of viewport width */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.512);
+  }
+  
+  .App-logo {
+    height: 25vh; /* Adjust height */
+    pointer-events: none;
+    margin-top: -100px;
+  }
+  
+  .intro {
+    color: white;
+    margin-top: 100px;
+    align-self: flex-start;
+  }
+  
+  .content {
+    color: white;
+    font-size: 1.2rem;
+    margin: 20px; /* Add some margin around the content */
+    text-align: left; /* Align text to the left */
+  }
+  .image-container {
+    display: flex;
+    justify-content: space-around; /* Adjust alignment as needed */
+    margin-top: 20px; /* Add some margin */
+    padding: 20px;
+  }
+  
+  .circular-image {
+    width: 210px; /* Adjust width as needed */
+    height: 210px; /* Adjust height as needed */
+    border-radius: 50%; /* Make it circular */
+    border: 2px solid white; /* Add a border */
+    margin: 0 40px; /* Add margin between images */
+    padding: 10px;
+    image-rendering: auto; /* Use browser's default rendering algorithm */
+
+  }
+  

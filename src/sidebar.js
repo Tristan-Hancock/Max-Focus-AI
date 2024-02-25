@@ -8,10 +8,9 @@ import { IoMdHome } from "react-icons/io";
 import {useSession , useSupabaseClient } from '@supabase/auth-helpers-react';
 
 
-
 function Sidebar({ isOpen, toggleSidebar }) {
   const session = useSession(); //if session exist we have user 
-  const supabase = useSupabaseClient(); // talk to supabse from here 
+  const supabase = useSupabaseClient();// talk to supabse from here 
   async function signOut (){
     await supabase.auth.signOut();
   }
@@ -28,7 +27,7 @@ function Sidebar({ isOpen, toggleSidebar }) {
       <CgBorderStyleSolid  /> 
     </button>
    <nav className="sidebar-nav">
-   <Link to="/about" onClick={toggleSidebar}>
+   <Link to="/" onClick={toggleSidebar}>
        <div className="icon-container">
         
          <IoMdHome  className="sidebar-icon" />
@@ -37,7 +36,7 @@ function Sidebar({ isOpen, toggleSidebar }) {
        </div>
      </Link>
     
-     <Link to="/About" onClick={toggleSidebar}>
+     <Link to={"./About"}  target="_blank" onClick={toggleSidebar}>
        <div className="icon-container">
          <AiFillProfile className="sidebar-icon"/> 
          <span>About</span>

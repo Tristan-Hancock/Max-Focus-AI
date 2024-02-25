@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 // import axios from 'axios';
 import logo from './logofill.png';
-import './App.css';
+import './App.css'; // Import the CSS module
 import Sidebar from './sidebar'; // Import the Sidebar component
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {useSession , useSupabaseClient , useSessionContext} from '@supabase/auth-helpers-react';
-import Login from './Login';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate here
+import { Link, useNavigate } from 'react-router-dom'; 
 import './login.css';
 import './dialog.css';
 import DateTimePicker from 'react-datetime-picker';
@@ -194,11 +192,7 @@ if(error){
   }
   
   return (
-    <BrowserRouter>
-
-      <Routes>
-        <Route path="/Login" element={<Login />} />
-      </Routes>
+   
    
 
 
@@ -430,7 +424,7 @@ if(error){
       
     </footer>
   </div>
-</BrowserRouter>
+
 
   );
   
